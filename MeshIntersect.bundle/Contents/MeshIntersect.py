@@ -14,6 +14,7 @@ import adsk.core, adsk.fusion, traceback
 import math
 
 handlers = []
+sketchObj = None
 
 def run(context):
     ui = None
@@ -115,8 +116,8 @@ class MeshIntersectCommandExecutedEventHandler(adsk.core.CommandEventHandler):
                 elif input.id == 'optimizeLines':
                     optimizeLines = input.value
 
-            # Get the active sketch.
-            sketch = app.activeEditObject
+            # Get the selected sketch.
+            sketch = sketchObj
 
             # Process each selected mesh body.
             for meshBody in meshBodies:
@@ -169,11 +170,17 @@ class MeshIntersectCommandCreatedEventHandler(adsk.core.CommandCreatedEventHandl
             app = adsk.core.Application.get()
             ui  = app.userInterface
             
-            # Make sure a sketch is active.
-            if app.activeEditObject.objectType != adsk.fusion.Sketch.classType():
-                # Exit and do nothing.
-                ui.messageBox('A sketch must be active.')
-                return
+            # Make sure a sketch is selected.
+            global sketchObj
+            sketchObj = None
+            if ui.activeSelections.count == 1:
+                sketchObj = ui.activeSelections.item(0).entity
+                if sketchObj.objectType != "adsk::fusion::Sketch":
+                    sketchObj = None
+    
+            if not sketchObj:
+                ui.messageBox('Please select a sketch before running this command!', 'No Sketch Selected')
+                return   
 
             cmd = args.command
             inputs = cmd.commandInputs
