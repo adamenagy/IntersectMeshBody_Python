@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ApplicationPackage SchemaVersion="1.0"
+	ProductType="Application"
+
+	AutodeskProduct="Fusion360"
+	Name="Intersect Mesh Body"
+	Description="Creates sketch geometry that is the intersection of selected mesh bodies and the x-y plane of the active sketch."
+	AppVersion="1.0.0"
+	Author="Autodesk, Inc."
+	AppNameSpace="com.autodesk.exchange.Fusion360.Intersect Mesh Body"
+	HelpFile="./Contents/Documentation/IntersectMeshBody.html"
+	OnlineDocumentation="www.autodesk.com"
+
+	ProductCode="*"
+	UpgradeCode="{30622784-7909-4d64-9f64-c5d58a06172c}" >
+	
+	<CompanyDetails Name="Autodesk, Inc."
+		Phone=" "
+		Url="www.autodesk.com"
+		Email="fusion.apps@autodesk.com" />
+
+		<RuntimeRequirements SupportPath="./Contents/docs" OS="win64|macOS" Platform="Fusion360" SeriesMin=""  />
+
+	<Components>
+		<RuntimeRequirements SupportPath="./Contents/docs" OS="win64|macOS" Platform="Fusion360" SeriesMin="" />
+		    <ComponentEntry AppName="Intersect Mesh Body" Version="1.0.0" ModuleName="./Contents/MeshIntersect.manifest" AppDescription="Creates sketch geometry that is the intersection of selected mesh bodies and the x-y plane of the active sketch." />
+	</Components>
+	
+</ApplicationPackage>
